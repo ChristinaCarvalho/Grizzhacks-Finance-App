@@ -1,0 +1,14 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.FinanceApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/dusty_blush</item>
+        <item name="colorSecondary">@color/gilded_honey</item>
+        <item name="colorPrimary">@color/walnut</item>
+        <item name="colorSecondary">@color/cafe_au_lait</item>
+        <item name="colorPrimary">@color/auburn</item>
+    </style>
+
+    <style name="Theme.FinanceApp" parent="Base.Theme.FinanceApp" />
+</resources>

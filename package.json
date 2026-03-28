@@ -1,0 +1,6 @@
+{
+  "name": "grizzhacks-finance-app",           // Your project name (lowercase, hyphens ok)
+  "version": "1.0.0",                          // Current version
+  "description": "Finance app project",        // What your app does
+  "main": "index.js"                           // Entry point
+}

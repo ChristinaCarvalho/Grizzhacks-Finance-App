@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="black">#FF000000</color>
+  <color name="white">#FFFFFFFF</color>
+  <color name="dusty_blush">#AD7877</color>
+  <color name="gilded_honey">#C28557</color>
+  <color name="auburn">#974C26</color>
+  <color name="walnut">#7D4220</color>
+  <color name="cafe_au_lait">#966C5B</color>
+  <color name="champagne">#EACEAA</color>
+  <color name="brown_sugar">#85431E</color>
+  <color name="whiskey_sour">#D39858</color>
+  <color name="burnt_coffee">#34150F</color>
+  <color name="balsamico">#150C0C</color>
+</resources>
