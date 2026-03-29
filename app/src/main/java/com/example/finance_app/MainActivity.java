@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.finance_app.activities.LoginActivity;
 import com.example.finance_app.activities.PlaidLink;
 import com.example.finance_app.adapters.AccountsAdapter;
 import com.example.finance_app.database.FirebaseManager;
@@ -88,7 +89,9 @@ public class MainActivity extends AppCompatActivity {
 
   private void logoutUser() {
     FirebaseAuth.getInstance().signOut();
-    startActivity(new Intent(this, LoginActivity.class));
+    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    startActivity(intent);
     finish();
   }
 
