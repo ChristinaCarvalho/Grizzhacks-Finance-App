@@ -18,17 +18,17 @@ An Android application designed to help users track their financial goals and ea
 ### Home Screen
 | Light Mode                                | Dark Mode                               |
 |-------------------------------------------|-----------------------------------------|
-| ![Home Light](screenshots/home_light.jpg) | ![Home Dark](screenshots/home_dark.jpg) |
+| ![Home Light](screenshots/Home_light.jpg) | ![Home Dark](screenshots/Home_dark.jpg) |
 
 ### Progress & Rewards
-| Light Mode                                        | Dark Mode                                       |
-|---------------------------------------------------|-------------------------------------------------|
-| ![Progress Light](screenshots/progress_light.jpg) | ![Progress Dark](screenshots/progress_dark.jpg) |
+| Light Mode                                        | Dark Mode                                        |
+|---------------------------------------------------|--------------------------------------------------|
+| ![Progress Light](screenshots/Progress_light.jpg) | ![Progress Dark](screenshots/Progress__dark.jpg) |
 
 ### Account Display
 | Light Mode                                      | Dark Mode                                     |
 |-------------------------------------------------|-----------------------------------------------|
-| ![Account Light](screenshots/account_light.jpg) | ![Account Dark](screenshots/account_dark.jpg) |
+| ![Account Light](screenshots/Account_light.jpg) | ![Account Dark](screenshots/Account_dark.jpg) |
 
 ## Tech Stack
 
