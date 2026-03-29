@@ -2,12 +2,13 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.FinanceApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="colorPrimary">@color/dusty_blush</item>
-        <item name="colorSecondary">@color/gilded_honey</item>
-        <item name="colorPrimary">@color/walnut</item>
+        <item name="colorPrimary">@color/balsamico</item>
+        <item name="colorOnPrimary">@color/white</item>
         <item name="colorSecondary">@color/cafe_au_lait</item>
-        <item name="colorPrimary">@color/auburn</item>
+        <item name="colorTertiary">@color/burnt_coffee</item>
+        <item name="android:windowBackground">@color/gilded_honey</item>
+        <item name="colorSurface">@color/gilded_honey</item>
+        <item name="colorOnSurface">@color/balsamico</item>
     </style>
 
     <style name="Theme.FinanceApp" parent="Base.Theme.FinanceApp" />

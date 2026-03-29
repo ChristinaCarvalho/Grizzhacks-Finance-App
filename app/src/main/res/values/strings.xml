@@ -14,4 +14,9 @@
     <string name="link_new_bank">Link New Bank</string>
     <string name="logout">Logout</string>
     <string name="remove">Remove</string>
+    <string name="account">Account</string>
+    <string name="savings_goal">Savings Goal:</string>
+    <string name="home">Home:</string>
+    <string name="amount">Amount:</string>
+    <string name="rewards">Rewards:</string>
 </resources>

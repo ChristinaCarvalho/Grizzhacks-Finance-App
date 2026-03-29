@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gilded_honey"
+    android:background="?attr/colorSurface"
     tools:context=".activities.LoginActivity">
 
   <TextView
@@ -13,7 +13,7 @@
     android:layout_height="wrap_content"
     android:fontFamily="monospace"
     android:text="@string/coffee_and_coin"
-    android:textColor="@color/balsamico"
+    android:textColor="?attr/colorOnSurface"
     android:textSize="40sp"
     android:textStyle="bold"
     app:layout_constraintBottom_toBottomOf="parent"
@@ -35,8 +35,8 @@
     android:autofillHints="emailAddress"
     android:importantForAutofill="yes"
     android:inputType="textEmailAddress"
-    android:textColor="@color/balsamico"
-    android:textColorHint="@color/burnt_coffee"
+    android:textColor="?attr/colorOnSurface"
+    android:textColorHint="?attr/colorTertiary"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/appTitle" />
@@ -54,8 +54,8 @@
         android:autofillHints="password"
         android:importantForAutofill="yes"
         android:inputType="textPassword"
-        android:textColor="@color/balsamico"
-        android:textColorHint="@color/burnt_coffee"
+        android:textColor="?attr/colorOnSurface"
+        android:textColorHint="?attr/colorTertiary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextText" />
@@ -68,8 +68,8 @@
         android:minHeight="48dp"
         android:fontFamily="monospace"
         android:text="@string/login"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/balsamico"
+        android:textColor="?attr/colorOnPrimary"
+        android:backgroundTint="?attr/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordInput" />
