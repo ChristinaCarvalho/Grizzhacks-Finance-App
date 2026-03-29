@@ -2,6 +2,8 @@
     <string name="app_name">Finance-App</string>
     <string name="coffee_and_coin">Coffee and Coin</string>
     <string name="login">Login</string>
+    <string name="signUp">Sign Up</string>
+    <string name="username">Username</string>
     <string name="password">password</string>
     <string name="welcome">Welcome!</string>
     <string name="email">Email</string>
