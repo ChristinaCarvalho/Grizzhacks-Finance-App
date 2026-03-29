@@ -1,5 +1,6 @@
 package com.example.finance_app.activities;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.InputType;
 import android.widget.Button;
@@ -22,13 +23,12 @@ public class AccountDetailActivity extends AppCompatActivity {
     private TextView accountNameText;
     private TextView amountText;
     private TextView savingGoalText;
-    private Button addGoalButton;
-    private Button homeButton;
 
-    private PlaidAccountData accountData;
+  private PlaidAccountData accountData;
     private FirebaseManager firebaseManager;
     private String userId;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,11 +46,11 @@ public class AccountDetailActivity extends AppCompatActivity {
         }
 
         // Initialize views
-        accountNameText = findViewById(R.id.Account);
+        accountNameText = findViewById(R.id.account_type);
         amountText = findViewById(R.id.Amount);
         savingGoalText = findViewById(R.id.SavingGoal);
-        addGoalButton = findViewById(R.id.addGoal);
-        homeButton = findViewById(R.id.home);
+      Button addGoalButton = findViewById(R.id.addGoal);
+      Button homeButton = findViewById(R.id.home);
 
         setupUI();
 
@@ -97,12 +97,12 @@ public class AccountDetailActivity extends AppCompatActivity {
     private void saveGoalToFirebase(double newGoal) {
         accountData.setSavingsGoal(newGoal);
         String accountKey = accountData.getAccountId();
-        
-        firebaseManager.updatePlaidAccount(userId, accountKey, accountData, 
+
+        firebaseManager.updatePlaidAccount(userId, accountKey, accountData,
             () -> {
                 Toast.makeText(AccountDetailActivity.this, "Goal updated!", Toast.LENGTH_SHORT).show();
                 updateGoalUI();
-            }, 
+            },
             error -> Toast.makeText(AccountDetailActivity.this, "Failed to update goal: " + error, Toast.LENGTH_SHORT).show()
         );
     }
