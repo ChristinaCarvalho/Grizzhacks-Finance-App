@@ -13,6 +13,23 @@ An Android application designed to help users track their financial goals and ea
   - Track rewards directly within the account progress screen.
 - **Real-time Database**: Powered by Firebase to ensure your data is always synced across devices.
 
+## Screenshots
+
+### Home Screen
+| Light Mode                                | Dark Mode                               |
+|-------------------------------------------|-----------------------------------------|
+| ![Home Light](screenshots/home_light.jpg) | ![Home Dark](screenshots/home_dark.jpg) |
+
+### Progress & Rewards
+| Light Mode                                        | Dark Mode                                       |
+|---------------------------------------------------|-------------------------------------------------|
+| ![Progress Light](screenshots/progress_light.jpg) | ![Progress Dark](screenshots/progress_dark.jpg) |
+
+### Account Display
+| Light Mode                                      | Dark Mode                                     |
+|-------------------------------------------------|-----------------------------------------------|
+| ![Account Light](screenshots/account_light.jpg) | ![Account Dark](screenshots/account_dark.jpg) |
+
 ## Tech Stack
 
 - **Language**: Java
