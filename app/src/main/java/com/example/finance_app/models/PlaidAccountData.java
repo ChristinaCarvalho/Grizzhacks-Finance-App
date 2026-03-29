@@ -1,6 +1,8 @@
 package com.example.finance_app.models;
 
-public class PlaidAccountData {
+import java.io.Serializable;
+
+public class PlaidAccountData implements Serializable {
 
   public String publicToken;
   public String accountId;
@@ -9,6 +11,8 @@ public class PlaidAccountData {
   public String institutionName;
   public long timestamp;
   public boolean isActive;
+  public double balance;
+  public double savingsGoal;
 
   // Default constructor required for Firebase
   public PlaidAccountData() {
@@ -23,6 +27,8 @@ public class PlaidAccountData {
     this.institutionName = institutionName;
     this.timestamp = System.currentTimeMillis();
     this.isActive = true;
+    this.balance = 0.0;
+    this.savingsGoal = 0.0;
   }
 
   // Getters and Setters
@@ -82,13 +88,30 @@ public class PlaidAccountData {
     isActive = active;
   }
 
+  public double getBalance() {
+    return balance;
+  }
+
+  public void setBalance(double balance) {
+    this.balance = balance;
+  }
+
+  public double getSavingsGoal() {
+    return savingsGoal;
+  }
+
+  public void setSavingsGoal(double savingsGoal) {
+    this.savingsGoal = savingsGoal;
+  }
+
   @Override
   public String toString() {
     return "PlaidAccountData{" +
       "publicToken='" + publicToken + '\'' +
       ", accountName='" + accountName + '\'' +
       ", institutionName='" + institutionName + '\'' +
-      ", timestamp=" + timestamp +
+      ", balance=" + balance +
+      ", savingsGoal=" + savingsGoal +
       '}';
   }
 }
