@@ -2,11 +2,12 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.FinanceApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
         <item name="colorPrimary">@color/champagne</item>
+        <item name="colorOnPrimary">@color/balsamico</item>
         <item name="colorSecondary">@color/whiskey_sour</item>
-        <item name="colorPrimary">@color/brown_sugar</item>
-        <item name="colorSecondary">@color/burnt_coffee</item>
-        <item name="colorPrimary">@color/balsamico</item>
+        <item name="colorTertiary">@color/brown_sugar</item>
+        <item name="android:windowBackground">@color/burnt_coffee</item>
+        <item name="colorSurface">@color/burnt_coffee</item>
+        <item name="colorOnSurface">@color/champagne</item>
     </style>
 </resources>

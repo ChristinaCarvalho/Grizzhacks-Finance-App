@@ -2,7 +2,6 @@
     <string name="app_name">Finance-App</string>
     <string name="coffee_and_coin">Coffee and Coin</string>
     <string name="login">Login</string>
-    <string name="username">Username</string>
     <string name="password">password</string>
     <string name="welcome">Welcome!</string>
     <string name="email">Email</string>
@@ -13,4 +12,9 @@
     <string name="link_new_bank">Link New Bank</string>
     <string name="logout">Logout</string>
     <string name="remove">Remove</string>
+    <string name="account">Account</string>
+    <string name="savings_goal">Savings Goal:</string>
+    <string name="home">Home:</string>
+    <string name="amount">Amount:</string>
+    <string name="rewards">Rewards:</string>
 </resources>
