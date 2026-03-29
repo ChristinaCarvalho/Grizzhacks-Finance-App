@@ -1,6 +1,8 @@
 package com.example.finance_app.models;
 
-public class PlaidAccountData {
+import java.io.Serializable;
+
+public class PlaidAccountData implements Serializable {
 
   public String publicToken;
   public String accountId;
@@ -9,6 +11,8 @@ public class PlaidAccountData {
   public String institutionName;
   public long timestamp;
   public boolean isActive;
+  public double balance;
+  public double savingsGoal;
 
   // New fields for progress
   public double currentAmount;
@@ -27,8 +31,6 @@ public class PlaidAccountData {
     this.institutionName = institutionName;
     this.timestamp = System.currentTimeMillis();
     this.isActive = true;
-    this.currentAmount = 0.0;
-    this.goalAmount = 1000.0; // Default goal
   }
 
   // Getters and Setters
@@ -64,12 +66,28 @@ public class PlaidAccountData {
     return (int) Math.min(100, (currentAmount / goalAmount) * 100);
   }
 
+  public double getBalance() {
+    return balance;
+  }
+
+  public void setBalance(double balance) {
+    this.balance = balance;
+  }
+
+  public double getSavingsGoal() {
+    return savingsGoal;
+  }
+
+  public void setSavingsGoal(double savingsGoal) {
+    this.savingsGoal = savingsGoal;
+  }
+
   @Override
   public String toString() {
     return "PlaidAccountData{" +
       "accountName='" + accountName + '\'' +
       ", institutionName='" + institutionName + '\'' +
-      ", progress=" + getProgressPercentage() + "%" +
+      ", timestamp=" + timestamp +
       '}';
   }
 }
