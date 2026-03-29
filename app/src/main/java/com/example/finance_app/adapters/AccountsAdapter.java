@@ -2,6 +2,7 @@ package com.example.finance_app.adapters;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.finance_app.R;
+import com.example.finance_app.activities.ProgressActivity;
 import com.example.finance_app.database.FirebaseManager;
 import com.example.finance_app.models.PlaidAccountData;
 import com.google.firebase.auth.FirebaseAuth;
@@ -72,6 +74,13 @@ public class AccountsAdapter extends ArrayAdapter<PlaidAccountData> {
     // Delete button
     Button deleteButton = convertView.findViewById(R.id.delete_button);
     deleteButton.setOnClickListener(v -> deleteAccount(position, account));
+
+    // Handle item click to open ProgressActivity
+    convertView.setOnClickListener(v -> {
+        Intent intent = new Intent(context, ProgressActivity.class);
+        intent.putExtra("ACCOUNT_ID", account.getAccountId() != null ? account.getAccountId() : account.getPublicToken());
+        context.startActivity(intent);
+    });
 
     return convertView;
   }

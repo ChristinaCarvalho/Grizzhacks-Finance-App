@@ -39,6 +39,12 @@
         android:exported="false"
         android:screenOrientation="portrait" />
 
+      <!-- Progress Activity -->
+      <activity
+        android:name=".activities.ProgressActivity"
+        android:exported="false"
+        android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

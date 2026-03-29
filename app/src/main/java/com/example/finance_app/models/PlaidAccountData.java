@@ -10,6 +10,10 @@ public class PlaidAccountData {
   public long timestamp;
   public boolean isActive;
 
+  // New fields for progress
+  public double currentAmount;
+  public double goalAmount;
+
   // Default constructor required for Firebase
   public PlaidAccountData() {
   }
@@ -23,72 +27,49 @@ public class PlaidAccountData {
     this.institutionName = institutionName;
     this.timestamp = System.currentTimeMillis();
     this.isActive = true;
+    this.currentAmount = 0.0;
+    this.goalAmount = 1000.0; // Default goal
   }
 
   // Getters and Setters
-  public String getPublicToken() {
-    return publicToken;
-  }
+  public String getPublicToken() { return publicToken; }
+  public void setPublicToken(String publicToken) { this.publicToken = publicToken; }
 
-  public void setPublicToken(String publicToken) {
-    this.publicToken = publicToken;
-  }
+  public String getAccountId() { return accountId; }
+  public void setAccountId(String accountId) { this.accountId = accountId; }
 
-  public String getAccountId() {
-    return accountId;
-  }
+  public String getAccountName() { return accountName; }
+  public void setAccountName(String accountName) { this.accountName = accountName; }
 
-  public void setAccountId(String accountId) {
-    this.accountId = accountId;
-  }
+  public String getAccountType() { return accountType; }
+  public void setAccountType(String accountType) { this.accountType = accountType; }
 
-  public String getAccountName() {
-    return accountName;
-  }
+  public String getInstitutionName() { return institutionName; }
+  public void setInstitutionName(String institutionName) { this.institutionName = institutionName; }
 
-  public void setAccountName(String accountName) {
-    this.accountName = accountName;
-  }
+  public long getTimestamp() { return timestamp; }
+  public void setTimestamp(long timestamp) { this.timestamp = timestamp; }
 
-  public String getAccountType() {
-    return accountType;
-  }
+  public boolean isActive() { return isActive; }
+  public void setActive(boolean active) { isActive = active; }
 
-  public void setAccountType(String accountType) {
-    this.accountType = accountType;
-  }
+  public double getCurrentAmount() { return currentAmount; }
+  public void setCurrentAmount(double currentAmount) { this.currentAmount = currentAmount; }
 
-  public String getInstitutionName() {
-    return institutionName;
-  }
+  public double getGoalAmount() { return goalAmount; }
+  public void setGoalAmount(double goalAmount) { this.goalAmount = goalAmount; }
 
-  public void setInstitutionName(String institutionName) {
-    this.institutionName = institutionName;
-  }
-
-  public long getTimestamp() {
-    return timestamp;
-  }
-
-  public void setTimestamp(long timestamp) {
-    this.timestamp = timestamp;
-  }
-
-  public boolean isActive() {
-    return isActive;
-  }
-
-  public void setActive(boolean active) {
-    isActive = active;
+  public int getProgressPercentage() {
+    if (goalAmount <= 0) return 0;
+    return (int) Math.min(100, (currentAmount / goalAmount) * 100);
   }
 
   @Override
   public String toString() {
     return "PlaidAccountData{" +
-      "publicToken='" + publicToken + '\'' +
-      ", accountName='" + accountName + '\'' +
+      "accountName='" + accountName + '\'' +
       ", institutionName='" + institutionName + '\'' +
-      ", timestamp=" + timestamp +
+      ", progress=" + getProgressPercentage() + "%" +
       '}';
   }
 }

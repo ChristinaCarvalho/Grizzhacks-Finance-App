@@ -16,7 +16,10 @@
     <string name="remove">Remove</string>
     <string name="account">Account</string>
     <string name="savings_goal">Savings Goal:</string>
-    <string name="home">Home:</string>
+    <string name="home">Home</string>
     <string name="amount">Amount:</string>
     <string name="rewards">Rewards:</string>
+    <string name="add_goal">Add Goal</string>
+    <string name="add_rewards">Add Rewards</string>
+  <string name="_0">0%</string>
 </resources>

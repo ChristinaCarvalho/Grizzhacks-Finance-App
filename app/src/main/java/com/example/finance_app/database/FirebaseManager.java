@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.finance_app.models.PlaidAccountData;
+import com.example.finance_app.models.Reward;
 import com.example.finance_app.models.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,6 +35,7 @@ public class FirebaseManager {
 
     PlaidAccountData accountData = new PlaidAccountData();
     accountData.setPublicToken(publicToken);
+    accountData.setAccountId(accountId);
     accountData.setTimestamp(System.currentTimeMillis());
 
     mDatabase.child("plaidData")
@@ -69,6 +71,10 @@ public class FirebaseManager {
           for (DataSnapshot accountSnapshot : snapshot.getChildren()) {
             PlaidAccountData account = accountSnapshot.getValue(PlaidAccountData.class);
             if (account != null) {
+              // Ensure accountId is set from the database key if it's missing in the object
+              if (account.getAccountId() == null) {
+                account.setAccountId(accountSnapshot.getKey());
+              }
               accounts.add(account);
             }
           }
@@ -94,6 +100,13 @@ public class FirebaseManager {
   public void deletePlaidAccount(String userId, String accountId,
                                  OnSuccessListener successListener,
                                  OnErrorListener errorListener) {
+    if (accountId == null) {
+      if (errorListener != null) {
+        errorListener.onError("Account ID is null");
+      }
+      return;
+    }
+
     mDatabase.child("plaidData")
       .child(userId)
       .child(accountId)
@@ -137,6 +150,58 @@ public class FirebaseManager {
   }
 
   /**
+   * Add a reward to an account
+   */
+  public void addReward(String userId, String accountId, Reward reward,
+                        OnSuccessListener successListener,
+                        OnErrorListener errorListener) {
+    DatabaseReference rewardRef = mDatabase.child("plaidData")
+            .child(userId)
+            .child(accountId)
+            .child("rewards")
+            .push();
+
+    reward.setId(rewardRef.getKey());
+
+    rewardRef.setValue(reward)
+      .addOnSuccessListener(aVoid -> {
+        if (successListener != null) successListener.onSuccess();
+      })
+      .addOnFailureListener(e -> {
+        if (errorListener != null) errorListener.onError(e.getMessage());
+      });
+  }
+
+  /**
+   * Get all rewards for an account
+   */
+  public void getRewards(String userId, String accountId, OnRewardsLoadedListener listener,
+                         OnErrorListener errorListener) {
+    mDatabase.child("plaidData")
+      .child(userId)
+      .child(accountId)
+      .child("rewards")
+      .addValueEventListener(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+          List<Reward> rewards = new ArrayList<>();
+          for (DataSnapshot rewardSnapshot : snapshot.getChildren()) {
+            Reward reward = rewardSnapshot.getValue(Reward.class);
+            if (reward != null) {
+              rewards.add(reward);
+            }
+          }
+          if (listener != null) listener.onRewardsLoaded(rewards);
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+          if (errorListener != null) errorListener.onError(error.getMessage());
+        }
+      });
+  }
+
+  /**
    * Save user profile data
    */
   public void saveUserProfile(String userId, String email, String displayName,
@@ -169,5 +234,9 @@ public class FirebaseManager {
 
   public interface OnAccountsLoadedListener {
     void onAccountsLoaded(List<PlaidAccountData> accounts);
+  }
+
+  public interface OnRewardsLoadedListener {
+    void onRewardsLoaded(List<Reward> rewards);
   }
 }
