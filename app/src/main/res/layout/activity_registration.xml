@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/gilded_honey"
+  tools:context=".activities.RegistrationActivity">
+
+  <TextView
+    android:id="@+id/regTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:fontFamily="monospace"
+    android:text="@string/register"
+    android:textColor="@color/balsamico"
+    android:textSize="32sp"
+    android:textStyle="bold"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.247" />
+
+  <!-- Material Design recommends text fields to be no wider than 488dp.
+       Added app:layout_constraintWidth_max="488dp" to comply. -->
+  <EditText
+    android:id="@+id/emailInput"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="30dp"
+    android:layout_marginTop="50dp"
+    android:layout_marginEnd="30dp"
+    app:layout_constraintWidth_max="488dp"
+    android:autofillHints="emailAddress"
+    android:fontFamily="monospace"
+    android:hint="@string/email"
+    android:importantForAutofill="yes"
+    android:inputType="textEmailAddress"
+    android:minHeight="48dp"
+    android:textColor="@color/balsamico"
+    android:textColorHint="#212121"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/regTitle" />
+
+  <EditText
+    android:id="@+id/passwordInput"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="32dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginEnd="32dp"
+    android:autofillHints="password"
+    android:fontFamily="monospace"
+    android:hint="@string/password"
+    android:importantForAutofill="yes"
+    android:inputType="textPassword"
+    android:minHeight="48dp"
+    android:textColor="@color/balsamico"
+    android:textColorHint="#212121"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/emailInput"
+    app:layout_constraintWidth_max="488dp" />
+
+  <Button
+    android:id="@+id/registerButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="52dp"
+    android:minHeight="48dp"
+    android:fontFamily="monospace"
+    android:text="@string/register_account"
+    android:textColor="@color/white"
+    android:backgroundTint="@color/balsamico"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/passwordInput" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -13,15 +12,27 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/tvAccountName"
+            android:id="@+id/institution_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Institution"
+            android:textSize="14sp"
+            android:textColor="@color/balsamico"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvBalance"/>
+
+        <TextView
+            android:id="@+id/account_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Account Name"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/tvBalance"
+            android:textColor="@color/burnt_coffee"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/institution_name"
+            app:layout_constraintEnd_toStartOf="@+id/tvBalance"/>
 
         <TextView
             android:id="@+id/tvBalance"
@@ -29,19 +40,42 @@
             android:layout_height="wrap_content"
             android:text="$0.00"
             android:textColor="@android:color/holo_green_dark"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/account_name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/institution_name" />
 
         <TextView
-            android:id="@+id/tvAccountType"
+            android:id="@+id/account_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Checking"
             android:textSize="14sp"
+            android:textColor="@color/walnut"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvAccountName" />
+            app:layout_constraintTop_toBottomOf="@id/account_name" />
+
+        <TextView
+            android:id="@+id/date_linked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Linked: Date"
+            android:textSize="12sp"
+            android:textColor="@color/walnut"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/account_type" />
+
+        <Button
+            android:id="@+id/delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Remove"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/auburn"
+            app:layout_constraintTop_toBottomOf="@id/date_linked"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
