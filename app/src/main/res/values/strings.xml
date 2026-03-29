@@ -4,4 +4,12 @@
     <string name="login">Login</string>
     <string name="username">Username</string>
     <string name="password">password</string>
+    <string name="email">Email</string>
+    <string name="register">Register</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="register_account">Register Account</string>
+    <string name="my_accounts">My Accounts</string>
+    <string name="link_new_bank">Link New Bank</string>
+    <string name="logout">Logout</string>
+    <string name="remove">Remove</string>
 </resources>

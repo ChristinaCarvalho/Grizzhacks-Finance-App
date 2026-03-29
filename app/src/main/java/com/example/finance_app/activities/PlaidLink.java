@@ -10,11 +10,8 @@ import com.example.finance_app.R;
 import com.example.finance_app.database.FirebaseManager;
 import com.example.finance_app.services.PlaidService;
 import com.google.firebase.auth.FirebaseAuth;
-import com.plaid.link.LinkActivity;
 import com.plaid.link.configuration.LinkTokenConfiguration;
 import com.plaid.link.result.LinkActivityResultContract;
-
-import java.util.Arrays;
 
 public class PlaidLink extends AppCompatActivity {
 
@@ -56,14 +53,11 @@ public class PlaidLink extends AppCompatActivity {
 
   private void openPlaidLink() {
     // Get link token from your backend
-    plaidService.getLinktokenFromBackend(linkToken -> {
+    plaidService.getLinktokenFromBackend(this, linkToken -> {
       if (linkToken != null) {
-        LinkTokenConfiguration configuration = LinkTokenConfiguration.Builder()
-          .clientName("My Bank App")
-          .user(new LinkTokenConfiguration.User(mAuth.getCurrentUser().getUid()))
-          .countryCodes(Arrays.asList("US"))
-          .language("en")
-          .linkToken(linkToken)
+        // Correct way to build LinkTokenConfiguration in Plaid Android SDK 5.x
+        LinkTokenConfiguration configuration = new LinkTokenConfiguration.Builder()
+          .token(linkToken)
           .build();
 
         linkLauncher.launch(configuration);
@@ -75,6 +69,7 @@ public class PlaidLink extends AppCompatActivity {
   }
 
   private void savePlaidDataToFirebase(String publicToken, String metadata) {
+    if (mAuth.getCurrentUser() == null) return;
     String userId = mAuth.getCurrentUser().getUid();
 
     firebaseManager.savePlaidAccount(

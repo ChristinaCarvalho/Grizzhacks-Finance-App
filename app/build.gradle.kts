@@ -41,6 +41,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:34.11.0"))
     implementation("com.google.firebase:firebase-database")
     implementation("com.google.firebase:firebase-auth")
+    implementation("com.android.volley:volley:1.2.1")
 
     // Plaid Link SDK
     implementation("com.plaid.link:sdk-core:5.5.1")
