@@ -20,6 +20,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+      <!-- Plaid Link Activity -->
+      <activity
+        android:name=".activities.PlaidLink"
+        android:exported="false"
+        android:screenOrientation="portrait" />
+
+      <!-- Login Activity -->
+      <activity
+        android:name=".activities.LoginActivity"
+        android:exported="false"
+        android:screenOrientation="portrait" />
+
+      <!-- Registration Activity -->
+      <activity
+        android:name=".activities.RegistrationActivity"
+        android:exported="false"
+        android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

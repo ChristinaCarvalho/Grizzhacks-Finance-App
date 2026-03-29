@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "260360927283",
+    "firebase_url": "https://finance-app-668e2-default-rtdb.firebaseio.com",
     "project_id": "finance-app-668e2",
     "storage_bucket": "finance-app-668e2.firebasestorage.app"
   },
