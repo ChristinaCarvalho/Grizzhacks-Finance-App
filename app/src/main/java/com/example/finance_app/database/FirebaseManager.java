@@ -150,6 +150,25 @@ public class FirebaseManager {
   }
 
   /**
+   * Update only the savings goal for a specific account
+   */
+  public void updateSavingsGoal(String userId, String accountId, double newGoal,
+                                OnSuccessListener successListener,
+                                OnErrorListener errorListener) {
+    mDatabase.child("plaidData")
+      .child(userId)
+      .child(accountId)
+      .child("goalAmount")
+      .setValue(newGoal)
+      .addOnSuccessListener(aVoid -> {
+        if (successListener != null) successListener.onSuccess();
+      })
+      .addOnFailureListener(e -> {
+        if (errorListener != null) errorListener.onError(e.getMessage());
+      });
+  }
+
+  /**
    * Add a reward to an account
    */
   public void addReward(String userId, String accountId, Reward reward,

@@ -1,6 +1,7 @@
 package com.example.finance_app.activities;
 
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class ProgressActivity extends AppCompatActivity {
+public class ProgressActivity extends AppCompatActivity implements RewardsAdapter.OnRewardRedeemedListener {
 
     private TextView institutionNameDisplay;
     private TextView amountDisplay;
@@ -59,10 +60,7 @@ public class ProgressActivity extends AppCompatActivity {
 
         homeButton.setOnClickListener(v -> finish());
 
-        addGoalButton.setOnClickListener(v -> {
-            // TODO: Implement update goal logic
-            Toast.makeText(this, "Update Goal Clicked", Toast.LENGTH_SHORT).show();
-        });
+        addGoalButton.setOnClickListener(v -> showUpdateGoalDialog());
 
         btnAddReward.setOnClickListener(v -> showAddRewardDialog());
     }
@@ -78,11 +76,57 @@ public class ProgressActivity extends AppCompatActivity {
         homeButton = findViewById(R.id.home);
         rewardsListView = findViewById(R.id.rewards);
 
-        rewardsAdapter = new RewardsAdapter(this, new ArrayList<>());
+        // Initial goal is 0, will be updated when account data loads
+        rewardsAdapter = new RewardsAdapter(this, new ArrayList<>(), 0.0, this);
         rewardsListView.setAdapter(rewardsAdapter);
 
         // Ensure addGoal button has correct text
         addGoalButton.setText(R.string.add_goal);
+    }
+
+    private void showUpdateGoalDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Update Savings Goal");
+
+        final EditText input = new EditText(this);
+        input.setHint("Enter new goal amount");
+        input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+
+        // Pre-fill with current goal if available
+        if (currentAccount != null) {
+            input.setText(String.valueOf(currentAccount.getGoalAmount()));
+        }
+
+        builder.setView(input);
+
+        builder.setPositiveButton("Update", (dialog, which) -> {
+            String goalStr = input.getText().toString().trim();
+            if (!goalStr.isEmpty()) {
+                try {
+                    double newGoal = Double.parseDouble(goalStr);
+                    saveSavingsGoalToFirebase(newGoal);
+                } catch (NumberFormatException e) {
+                    Toast.makeText(this, "Invalid amount", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+
+        builder.show();
+    }
+
+    private void saveSavingsGoalToFirebase(double newGoal) {
+        if (mAuth.getCurrentUser() == null || accountId == null) return;
+
+        firebaseManager.updateSavingsGoal(mAuth.getCurrentUser().getUid(), accountId, newGoal,
+                () -> Toast.makeText(this, "Savings goal updated!", Toast.LENGTH_SHORT).show(),
+                error -> Toast.makeText(this, "Error: " + error, Toast.LENGTH_SHORT).show());
+    }
+
+    @Override
+    public void onRewardRedeemed(Reward reward) {
+        Toast.makeText(this, "Redeemed: " + reward.getName(), Toast.LENGTH_LONG).show();
+        reward.setAchieved(true);
     }
 
     private void showAddRewardDialog() {
@@ -92,16 +136,16 @@ public class ProgressActivity extends AppCompatActivity {
         builder.setView(dialogView);
 
         EditText rewardNameInput = dialogView.findViewById(R.id.rewardName);
-        EditText targetAmountInput = dialogView.findViewById(R.id.targetAmount);
+        EditText priceInput = dialogView.findViewById(R.id.targetAmount);
 
         builder.setPositiveButton("Add", (dialog, which) -> {
             String name = rewardNameInput.getText().toString().trim();
-            String amountStr = targetAmountInput.getText().toString().trim();
+            String amountStr = priceInput.getText().toString().trim();
 
             if (!name.isEmpty() && !amountStr.isEmpty()) {
                 try {
-                    double targetAmount = Double.parseDouble(amountStr);
-                    saveRewardToFirebase(name, targetAmount);
+                    double price = Double.parseDouble(amountStr);
+                    saveRewardToFirebase(name, price);
                 } catch (NumberFormatException e) {
                     Toast.makeText(this, "Invalid amount", Toast.LENGTH_SHORT).show();
                 }
@@ -115,10 +159,10 @@ public class ProgressActivity extends AppCompatActivity {
         builder.create().show();
     }
 
-    private void saveRewardToFirebase(String name, double targetAmount) {
+    private void saveRewardToFirebase(String name, double price) {
         if (mAuth.getCurrentUser() == null || accountId == null) return;
 
-        Reward newReward = new Reward(null, name, targetAmount);
+        Reward newReward = new Reward(null, name, price);
         firebaseManager.addReward(mAuth.getCurrentUser().getUid(), accountId, newReward,
                 () -> Toast.makeText(this, "Reward added!", Toast.LENGTH_SHORT).show(),
                 error -> Toast.makeText(this, "Error: " + error, Toast.LENGTH_SHORT).show());
@@ -133,6 +177,11 @@ public class ProgressActivity extends AppCompatActivity {
                 if (accountId.equals(account.getAccountId()) || accountId.equals(account.getPublicToken())) {
                     currentAccount = account;
                     updateUI();
+
+                    // Update the adapter with the real savings goal
+                    if (rewardsAdapter != null) {
+                        rewardsAdapter.updateSavingsGoal(currentAccount.getGoalAmount());
+                    }
                     break;
                 }
             }
