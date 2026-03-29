@@ -1,5 +1,6 @@
 package com.example.finance_app.services;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -22,14 +23,11 @@ public class PlaidService {
   /**
    * Get Plaid link token from your backend server
    */
-  public void getLinktokenFromBackend(LinkTokenCallback callback) {
+  public void getLinktokenFromBackend(Context context, LinkTokenCallback callback) {
     try {
       JSONObject jsonBody = new JSONObject();
-      // For Cloud Functions, we'll pass user_id as a query param or in body
-      // Adjusting to match the index.js logic
       jsonBody.put("user_id", "test-user");
 
-      // Use the specific function URL from Constants
       String url = Constants.PLAID_CREATE_LINK_TOKEN_URL;
 
       JsonObjectRequest request = new JsonObjectRequest(
@@ -43,35 +41,34 @@ public class PlaidService {
             callback.onLinkTokenReceived(linkToken);
           } catch (JSONException e) {
             Log.e(TAG, "Error parsing response", e);
-            callback.onLinkTokenReceived(null);
+            callback.onError(e);
           }
         },
         error -> {
           Log.e(TAG, "Error getting link token: " + (error.networkResponse != null ? error.networkResponse.statusCode : "unknown"), error);
-          callback.onLinkTokenReceived(null);
+          callback.onError(error);
         }
       );
 
       if (requestQueue == null) {
-        requestQueue = Volley.newRequestQueue(null);
+        requestQueue = Volley.newRequestQueue(context);
       }
       requestQueue.add(request);
 
     } catch (JSONException e) {
       Log.e(TAG, "Error creating request body", e);
-      callback.onLinkTokenReceived(null);
+      callback.onError(e);
     }
   }
 
   /**
    * Exchange public token for access token on your backend
    */
-  public void exchangePublicToken(String publicToken, ExchangeTokenCallback callback) {
+  public void exchangePublicToken(Context context, String publicToken, ExchangeTokenCallback callback) {
     try {
       JSONObject jsonBody = new JSONObject();
       jsonBody.put("public_token", publicToken);
 
-      // Use the specific function URL from Constants
       String url = Constants.PLAID_EXCHANGE_TOKEN_URL;
 
       JsonObjectRequest request = new JsonObjectRequest(
@@ -86,32 +83,34 @@ public class PlaidService {
             callback.onTokenExchanged(accessToken, itemId);
           } catch (JSONException e) {
             Log.e(TAG, "Error parsing response", e);
-            callback.onTokenExchanged(null, null);
+            callback.onError(e);
           }
         },
         error -> {
           Log.e(TAG, "Error exchanging token", error);
-          callback.onTokenExchanged(null, null);
+          callback.onError(error);
         }
       );
 
       if (requestQueue == null) {
-        requestQueue = Volley.newRequestQueue(null);
+        requestQueue = Volley.newRequestQueue(context);
       }
       requestQueue.add(request);
 
     } catch (JSONException e) {
       Log.e(TAG, "Error creating request body", e);
-      callback.onTokenExchanged(null, null);
+      callback.onError(e);
     }
   }
 
   // Callbacks
   public interface LinkTokenCallback {
     void onLinkTokenReceived(String linkToken);
+    void onError(Exception e);
   }
 
   public interface ExchangeTokenCallback {
     void onTokenExchanged(String accessToken, String itemId);
+    void onError(Exception e);
   }
 }

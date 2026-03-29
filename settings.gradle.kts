@@ -19,9 +19,11 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = uri("https://repo.plaid.com/releases")
+        }
     }
 }
 
 rootProject.name = "Finance-App"
 include(":app")
- 
